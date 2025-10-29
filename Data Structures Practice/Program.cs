@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace Data_Structures_Practice
@@ -38,7 +37,8 @@ namespace Data_Structures_Practice
                 Console.Write(""""
                     1.Add to front
                     2.Add to the end
-                    3.Print List
+                    3.Add node at point
+                    4.Print List
 
                     Answer:
                     """");
@@ -54,10 +54,10 @@ namespace Data_Structures_Practice
                         case 2:
                             AddNodeAtEnd(head, list);
                             break;
-                        case 4:
-                            
-                            break;
                         case 3:
+                            AddNodeAtPoint(head, list);
+                            break;
+                        case 4:
                             Console.Clear();
                             PrintLinkedList(head, list);
                             Console.WriteLine("\nReached the end of the list");
@@ -223,7 +223,62 @@ namespace Data_Structures_Practice
 
         }
 
-        
+        private static void AddNodeAtPoint(ListNode head, LinkedList<int> list)
+        {
+            Console.WriteLine("What place do you want this number to be?");
+            if (!int.TryParse(Console.ReadLine(), out int place) || place < 1)
+            {
+                Console.WriteLine("Invalid place.");
+                return;
+            }
+
+            Console.WriteLine("What do you want the number to be");
+            if (!int.TryParse(Console.ReadLine(), out int number))
+            {
+                Console.WriteLine("Invalid number.");
+                return;
+            }
+                        
+            if (list.Count == 0 || place <= 1)
+            {
+                list.AddFirst(number);
+            }
+            else if (place > list.Count)
+            {
+                list.AddLast(number);
+            }
+            else
+            {
+            
+                var node = list.First;
+                for (int i = 1; i < place; i++)
+                {
+                    node = node.Next;
+                }
+                
+                list.AddBefore(node, number);
+            }
+
+            
+            if (list.Count == 0)
+            {
+                head = null;
+            }
+            else
+            {
+                head = new ListNode(list.First.Value);
+                ListNode current = head;
+                foreach (var item in list.Skip(1))
+                {
+                    current.next = new ListNode(item);
+                    current = current.next;
+                }
+            }
+
+            Console.Clear();
+            Console.WriteLine($"Added {number} at position {Math.Min(place, list.Count)}");
+            PrintLinkedList(head, list);
+        }
 
 
 
