@@ -39,6 +39,7 @@ namespace Data_Structures_Practice
                     1.Add to front
                     2.Add to the end
                     3.Print List
+
                     Answer:
                     """");
 
@@ -48,16 +49,19 @@ namespace Data_Structures_Practice
                     switch (option)
                     {
                         case 1:
-                            Console.ReadLine();
                             AddNewHead(head, list);
                             break;
                         case 2:
-                            
                             AddNodeAtEnd(head, list);
+                            break;
+                        case 4:
+                            
                             break;
                         case 3:
                             Console.Clear();
                             PrintLinkedList(head, list);
+                            Console.WriteLine("\nReached the end of the list");
+                            Console.WriteLine("-------------------\n");
                             break;
                         
                     }
@@ -80,6 +84,7 @@ namespace Data_Structures_Practice
 
         private static void PrintLinkedList(ListNode head, LinkedList<int> list)
         {
+            
             Thread.Sleep(100);
             if (head == null)
             {
@@ -93,12 +98,13 @@ namespace Data_Structures_Practice
                     Thread.Sleep(100);
                     Console.WriteLine(head.val);
                     head = head.next;
+                    
                 }
-                Console.WriteLine("\nReached the end of the list");
-                Console.WriteLine("-------------------\n");
+                Console.WriteLine($"Number of nodes: {list.Count()}");
+            
             }
          
-                Console.WriteLine("Would you like to see the list in reverse?");
+                Console.WriteLine("\nWould you like to see the list in reverse?");
 
                 Console.Write("""
                     1.Yes
@@ -115,18 +121,17 @@ namespace Data_Structures_Practice
                     switch (option)
                     {
                         case 1:
-                        Console.Clear ();
+                            Console.Clear ();
                             ReverseList(list);
 
                             break;
                         case 2:
-                            Console.Clear();
                             return;
 
                         default:
                             Console.WriteLine("Incorrect answer");
-                            PrintLinkedList(head, list);
-                            break;
+                            return;
+                            
 
 
                     }
@@ -141,11 +146,37 @@ namespace Data_Structures_Practice
 
 
             }
-       
+
+
+        private static void PrintLinkedListReverseOption(ListNode head, LinkedList<int> list)
+        {
+            Thread.Sleep(100);
+            if (head == null)
+            {
+                Console.WriteLine("Linked List is empty");
+            }
+
+            else
+            {
+                while (head != null)
+                {
+                    Thread.Sleep(100);
+                    Console.WriteLine(head.val);
+                    head = head.next;
+                }
+
+            }
+        }
+
 
         private static void ReverseList(LinkedList<int> list)
         {
-            var newList = list.Reverse();
+            LinkedList<int> newList = new LinkedList<int> ();
+            var revList=list.Reverse();
+            foreach(int item in revList)
+            {
+                newList.AddLast(item);
+            }
             ListNode lastNode = new ListNode(newList.First());
             ListNode current= lastNode;
 
@@ -155,28 +186,21 @@ namespace Data_Structures_Practice
                 current= current.next;
             }
 
-            Thread.Sleep(100);
-            if (lastNode == null)
-            {
-                Console.WriteLine("Linked List is empty");
-            }
-
-            else
-            {
-                Console.WriteLine("");
-                while (lastNode != null)
-                {
-                    Thread.Sleep(100);
-                    Console.WriteLine(lastNode.val);
-                    lastNode = lastNode.next;
-                }
+            PrintLinkedListReverseOption(lastNode, list);
+            
                 Console.WriteLine("\nReached the end of the reversed list");
-                Console.WriteLine("-------------------\n");
+                
+              
+
+              
+              
+
+
             }
 
 
 
-        }
+        
 
         private static void AddNewHead(ListNode head, LinkedList<int> list)
         {
