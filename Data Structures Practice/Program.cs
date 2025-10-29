@@ -25,12 +25,12 @@ namespace Data_Structures_Practice
             list.AddLast(3);
             list.AddLast(6);
             list.AddLast(5);
-            ListNode head = new ListNode(list.First());
-            ListNode current = head;
-            foreach (var item in list.Skip(1))
+            ListNode head = new ListNode(list.First()); //specifies which is the head
+            ListNode current = head;// clarifies on what node you currently are which is the head at start
+            foreach (var item in list.Skip(1)) 
             {
-                current.next = new ListNode(item);
-                current = current.next;
+                current.next = new ListNode(item);//the next of the current is the one being specified
+                current = current.next; //moves to the next node of the linked list
             }
 
             while (true)
@@ -76,15 +76,9 @@ namespace Data_Structures_Practice
 
         }
 
-
-
-        // Now head points to the head of the linked list
-
-    
-
         private static void PrintLinkedList(ListNode head, LinkedList<int> list)
         {
-            
+
             Thread.Sleep(100);
             if (head == null)
             {
@@ -98,56 +92,50 @@ namespace Data_Structures_Practice
                     Thread.Sleep(100);
                     Console.WriteLine(head.val);
                     head = head.next;
-                    
+
                 }
                 Console.WriteLine($"Number of nodes: {list.Count()}");
-            
-            }
-         
-                Console.WriteLine("\nWould you like to see the list in reverse?");
 
-                Console.Write("""
+            }
+
+            Console.WriteLine("\nWould you like to see the list in reverse?");
+
+            Console.Write("""
                     1.Yes
                     2.No
                     =
                     """);
 
             int option = Convert.ToInt32(Console.ReadLine());
-            
-            
-                try
+
+
+            try
+            {
+
+                switch (option)
                 {
+                    case 1:
+                        Console.Clear();
+                        ReverseList(list);
 
-                    switch (option)
-                    {
-                        case 1:
-                            Console.Clear ();
-                            ReverseList(list);
+                        break;
+                    case 2:
+                        return;
 
-                            break;
-                        case 2:
-                            return;
-
-                        default:
-                            Console.WriteLine("Incorrect answer");
-                            return;
-                            
+                    default:
+                        Console.WriteLine("Incorrect answer");
+                        return;
 
 
-                    }
 
                 }
-                catch (FormatException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-
-
-
 
             }
-
-
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
         private static void PrintLinkedListReverseOption(ListNode head, LinkedList<int> list)
         {
             Thread.Sleep(100);
@@ -167,8 +155,6 @@ namespace Data_Structures_Practice
 
             }
         }
-
-
         private static void ReverseList(LinkedList<int> list)
         {
             LinkedList<int> newList = new LinkedList<int> ();
@@ -197,11 +183,6 @@ namespace Data_Structures_Practice
 
 
             }
-
-
-
-        
-
         private static void AddNewHead(ListNode head, LinkedList<int> list)
         {
             Console.WriteLine($"What number would you like to add to the front of list");
@@ -221,7 +202,6 @@ namespace Data_Structures_Practice
             Console.WriteLine($"Added {newHeadValue} to the front of list");
             PrintLinkedList(head, list);
         }
-
         private static void AddNodeAtEnd(ListNode head, LinkedList<int> list)
         {
             Console.WriteLine($"What number would you like to add to the end of the list");
@@ -243,6 +223,7 @@ namespace Data_Structures_Practice
 
         }
 
+        
 
 
 
